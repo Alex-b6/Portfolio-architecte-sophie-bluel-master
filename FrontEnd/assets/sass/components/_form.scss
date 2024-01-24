@@ -1,0 +1,80 @@
+// FORM
+
+// CONTACT //
+#contact {
+	width: 50%;
+    margin: auto;
+}
+#contact > * {
+	text-align: center;
+
+}
+#contact h2{
+	margin-bottom: 20px;
+}
+#contact form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#contact label {
+	margin: 2em 0 1em 0;
+}
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+// LOGIN //
+
+.login__form{
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+	width: 35%;
+}
+.login__form input{
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.login__form label{
+	margin: 3em 0 1em 0;
+}
+.login__form textarea{
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+.login__form input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	border: 2px solid #1D6154;
+	margin : 3em auto;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	transition: all 0.5s ease;
+}
+
+// MODALE //
