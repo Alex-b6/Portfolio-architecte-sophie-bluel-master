@@ -266,6 +266,10 @@ footer nav ul {
   background-color: #1D6154;
 }
 
+a {
+  text-decoration: none;
+}
+
 .login {
   display: flex;
   flex-direction: column;
