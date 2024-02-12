@@ -9,17 +9,88 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/sass/main.css">
+	<script src="https://kit.fontawesome.com/de5d655142.js" crossorigin="anonymous"></script>
 	<script type="module" src="./assets/script/modale.js"></script>
 </head>
 <body>
+<!-- MODULE ADMIN -->
+<aside class="admin__rod admin__modifer" aria-hidden="true" style="display: none;">
+	<div class="admin__modifer">
+		<i class="fa-solid fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</div>
+</aside>
+
+<aside id="modale" class="modale" aria-hidden="true" style="display: none;">
+	<div class="modale-wrapper js-modale-stop">
+		<a href="" class="js-modale-close">
+			<i class="fa-solid fa-xmark"></i>
+		</a>
+		<h2>Galerie photo</h2>
+		<div class="js-admin-projets">
+			<!-- generation des photos dynamiquement -->
+		</div>
+		<a href="#modaleProjet" class="js-modale-projet">Ajouter un projet</a>	
+	</div>
+</aside>
+
+<aside id="modaleProjet" class="modale-projet" aria-hidden="true"  style="display: none;">
+	<div class="modale-wrapper js-modale-stop">
+		<div class="modale-projet-logo">
+			<a href="" class="js-modale-return">
+				<i class="fa-solid fa-arrow-left"></i>
+			</a>
+			<a href="" class="js-modale-close">
+				<i class="fa-solid fa-xmark"></i>
+			</a>
+		</div>
+
+		<h2>Ajout d'un projet</h2>
+
+		<form class="modale-projet-form" action="" enctype="multipart/form-data">
+
+			<div class="form-group-photo">
+				<i class="fa-regular fa-image"></i>
+				<label for="photo">+ Ajouter une photo</label>
+				<input type="file" name="photo" id="photo" class="js-image">
+			</div>
+
+			<div class="form-group-title">
+				<label for="titre">Titre</label>
+				<input class="js-title" type="text" name="titre" id="titre">
+			</div>
+
+			<div class="form-group-id">
+				<label for="categorie">Catégorie</label>
+				<select name="categorie" id="categorie" class="js-categoryId">
+					<option value="1">Objets</option>
+					<option value="2">Appartements</option>
+					<option value="3">Hôtels & restaurants</option>
+				</select>
+			</div>
+
+			<input type="submit" class="js-add-work" value="Ajouter le projet">
+		</form>
+	</div>
+</aside>
+<!--  -->
+
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<a href="login.html"><li>login</li></a>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			<a href="#portfolio">
+				<li>projets</li>
+			</a>
+			<a href="#contact">
+				<li>contact</li>
+			</a>
+			<a href="login.html">
+				<li class="js-alredy-logged">login</li>
+			</a>
+			<a href="https://www.instagram.com" target="_blank">
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</a>
 		</ul>
 	</nav>
 </header>
@@ -36,58 +107,21 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="filters">
+		<div class="portfolio-title">
+			<h2>Mes Projets</h2>
+			<div class="admin__modifer" aria-hidden="true" style="display: none;">
+				<i class="fa-solid fa-pen-to-square"></i>
+				<a href="#modale" class="js-modale">Modifier</a>
+			</div>
+		</div>
+		<div id="allFilters" class="filters">
 			<button class="filter__btn filter__btn-id-null filter__btn--active">Tous</button>
 			<button class="filter__btn filter__btn-id-1">Objets</button>
 			<button class="filter__btn filter__btn-id-2">Appartements</button>
 			<button class="filter__btn filter__btn-id-3">Hôtels & restaurants</button>
 		</div>
 		<div class="gallery">
-			<!--<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>-->
+			<!-- Générer dynamiquement -->
 		</div>
 	</section>
 	<section id="contact">

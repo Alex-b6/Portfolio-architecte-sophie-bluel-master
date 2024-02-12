@@ -1,0 +1,193 @@
+/* ADMIN */
+
+
+
+/* ADMIN EDITION MODE  */
+
+.admin__rod{
+	position: fixed;
+	right: 0;
+	top: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 40px;
+
+	background-color: black;
+}
+
+.admin__rod button{
+	font-family: 'work sans';
+	font-weight: 550;
+	background-color: white;
+	border-radius: 60px ;
+	padding: 5px 15px;
+	margin: 0 25px;
+	border: none;
+	transition: all 0.2s ease;
+}
+
+
+.admin__modifer{
+	display: flex;
+	column-gap: 5px;
+	color: black;
+}
+.admin__rod .admin__modifer{
+	color: white;
+}
+.portfolio-title{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/* MODALE  GALERIE PHOTO*/
+.modale{
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+
+	animation: fadeIn 0.2s both;
+}
+
+
+.modale-wrapper{
+	display: flex;
+	flex-direction: column;
+
+	overflow: auto;
+	max-width: calc(98vh - 20px);
+	max-height: calc(98vh - 20px);
+	width: 675px;
+	padding: 30px;
+	background-color: white;
+
+	animation: slideFromTop 0.2s both;
+}
+
+.js-modale-close{
+	display: flex;
+	justify-content: flex-end;
+}
+.modale-wrapper h2{
+	display: flex;
+	justify-content: center;
+	margin: 20px 0 50px 0
+}
+
+.btn-admin{
+	display: flex;
+	justify-content: center;
+	width: 300px;
+	margin: 0px auto 20px auto;
+}
+.btn-clear-admin{
+	display: flex;
+	justify-content: center;
+	color: #D65353;
+	margin-bottom: 30px;
+}
+
+.js-admin-projets::after{
+	display: flex;
+	
+	content: " ";
+	border-top: 1px solid black;
+	height: 1px;
+	width: 90%;
+	margin: 40px auto;
+}
+
+.js-admin-projets{
+	width: 550px;
+	margin: 10px auto;
+	display: flex;
+	flex-wrap: wrap;
+}
+.gallery__item-modale{
+	display: flex;	
+	flex-direction: column;
+	margin: 0 5px;
+	width: 95px;
+}
+
+.gallery__item-modale img{
+	width: 95px;
+	height: 120px;
+	object-fit: cover;
+	margin-bottom: 5px;
+}
+.fa-trash-alt:before, .fa-trash-can:before {
+    /* position: relative; */
+	color: white;
+	background-color: black;
+	padding: 5px;
+	border-radius: 20%;
+}
+.gallery__item-modale p{
+	position: relative;
+	bottom: 116px;
+	left: 68px; 
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+.gallery__item-modale a{
+	position: relative;
+	bottom: 15px;
+}
+.modale .js-modale-projet{	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	border: 2px solid #1D6154;
+	margin: 0 auto 30px auto;
+	height: 50px;
+	width: 250px;
+	border-radius: 60px ;
+	transition: all 0.5s ease;
+}
+
+
+
+
+/* MODALE AJOUT PROJET */
+
+
+.modale-projet{
+	position: fixed;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+
+	animation: fadeIn 0.4s both;
+}
+.modale-projet-logo{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
