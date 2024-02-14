@@ -81,8 +81,9 @@ nav ul {
 
 }
 nav li {
-	padding: 0 10px;
+	padding: 0 0 0 45px;
 	font-size: 1.2em;
+	text-decoration: none;
 }
 
 li:hover {
@@ -113,7 +114,7 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-right: 1em;
 }
 .gallery {
 	width: 100%;
@@ -121,6 +122,7 @@ li:hover {
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+	margin-top: 40px;
 }
 
 .gallery img {
