@@ -204,6 +204,7 @@ function adminPanel() {
             a.removeAttribute("aria-hidden")
             a.removeAttribute("style")
             AlredyLogged.innerHTML = "logout";
+            allFilters.style.display="none"; //masque les boutons filtre
         }
     });
 }
@@ -232,12 +233,12 @@ async function deleteProjets() {
 
     .then (response => {
         console.log(response)
-        // Token good
+        // Token true
         if (response.status === 204) {
             console.log("DEBUG SUPPRESION DU PROJET " + this.classList[0])
             refreshPage(this.classList[0])
         }
-        // Token inorrect
+        // Token false
         else if (response.status === 401) {
             alert("Vous n'êtes pas autorisé à supprimer ce projet, merci de vous connecter avec un compte valide")
             window.location.href = "login.html";
@@ -343,7 +344,7 @@ async function addWork(event) {
         });
 
         if (response.status === 201) {
-            alert("Projet ajouté avec succès :)");
+            alert("Projet ajouté avec succès");
             modaleProjets(dataAdmin);
             backToModale(event);
             generationProjets(data, null);
