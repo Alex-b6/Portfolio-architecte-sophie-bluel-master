@@ -324,9 +324,9 @@ imageInput.addEventListener("change", function(event) {
     if (selectedImage) {
         const imagePreview = document.querySelector(".js-image-preview");
         imagePreview.src = URL.createObjectURL(selectedImage);
-        previewImg.style.display="block";
-        beforePreview.style.display="none";
-        formgpePhoto.classList.add("hide-after");
+        previewImg.style.display="block"; //affiche la preview du fichier selectionné
+        beforePreview.style.display="none"; //cache la partie ajout d'un fichier
+        formgpePhoto.classList.add("hide-after"); //cache le ::after
     }
 });
 
@@ -352,10 +352,6 @@ async function addWork(event) {
             formData.append("category", categoryId);
             formData.append("image", image);
 
-            // Afficher la miniature avant l'ajout
-            const imagePreview = document.querySelector(".js-image-preview");
-            imagePreview.src = URL.createObjectURL(image);
-
             const response = await fetch("http://localhost:5678/api/works", {
                 method: "POST",
                 headers: {
@@ -369,11 +365,14 @@ async function addWork(event) {
                 modaleProjets(dataAdmin);
                 backToModale(event);
                 generationProjets(data, null);
-            } else if (response.status === 400) {
+            } 
+            if (response.status === 400) {
                 alert("Merci de remplir tous les champs");
-            } else if (response.status === 500) {
+            } 
+            if (response.status === 500) {
                 alert("Erreur serveur");
-            } else if (response.status === 401) {
+            } 
+            if (response.status === 401) {
                 alert("Vous n'êtes pas autorisé à ajouter un projet");
                 window.location.href = "login.html";
             }

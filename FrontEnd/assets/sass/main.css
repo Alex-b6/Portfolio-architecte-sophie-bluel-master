@@ -389,7 +389,6 @@ html {
 }
 
 .fa-trash-alt:before, .fa-trash-can:before {
-  /* position: relative; */
   color: white;
   background-color: black;
   padding: 5px;
@@ -444,6 +443,14 @@ html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.fa-xmark {
+  font-size: 25px;
+}
+
+.fa-arrow-left {
+  font-size: 25px;
 }
 
 #contact {
