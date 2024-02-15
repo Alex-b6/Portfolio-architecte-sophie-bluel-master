@@ -150,7 +150,7 @@ html {
 .filter__btn:hover, .btn-admin:hover {
   color: white;
   background-color: #1D6154;
-  scale: 1.05;
+  transform: scale(1.05);
 }
 
 .admin__rod button:hover {
@@ -161,7 +161,7 @@ html {
 .login__form input[type=submit]:hover {
   color: #1D6154;
   background-color: white;
-  scale: 1.05;
+  transform: scale(1.05);
 }
 
 .login a:hover {
@@ -212,7 +212,7 @@ html {
 .modale .js-modale-projet:hover {
   color: #1D6154;
   background-color: white;
-  scale: 1.05;
+  transform: scale(1.05);
 }
 
 /* MODALE AJOUT PROJET  */
@@ -260,7 +260,7 @@ html {
 .modale-projet-form input[type=submit]:hover {
   color: #1D6154;
   background-color: white;
-  scale: 1.05;
+  transform: scale(1.05);
   cursor: pointer;
 }
 
@@ -340,7 +340,7 @@ html {
 .modale-wrapper h2 {
   display: flex;
   justify-content: center;
-  margin: 20px 0 40px 0;
+  margin: 20px 0 35px 0;
 }
 
 .btn-admin {

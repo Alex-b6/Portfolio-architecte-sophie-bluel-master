@@ -6,7 +6,7 @@ html {
 .filter__btn:hover, .btn-admin:hover{
 	color: white;
 	background-color: #1D6154;
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 
@@ -18,7 +18,7 @@ html {
 .login__form input[type="submit"]:hover{
 	color: #1D6154;
 	background-color: white;
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 .login a:hover {
@@ -56,7 +56,7 @@ html {
 .modale .js-modale-projet:hover{
 	color: #1D6154;
 	background-color: white;
-	scale: 1.05;
+	transform: scale(1.05);
 }
 
 
@@ -91,6 +91,6 @@ html {
 .modale-projet-form input[type="submit"]:hover{
 	color: #1D6154;
 	background-color: white;
-	scale: 1.05;
+	transform: scale(1.05);
 	cursor: pointer;
 }
