@@ -577,6 +577,10 @@ html {
   top: 315px;
 }
 
+.form-group-photo.hide-after::after {
+  display: none;
+}
+
 .form-group-title {
   display: flex;
   flex-direction: column;
@@ -633,6 +637,11 @@ html {
   margin: 15px auto;
   position: absolute;
   bottom: 90px;
+}
+
+.js-image-preview {
+  width: 140px;
+  height: 200px;
 }
 
 header {

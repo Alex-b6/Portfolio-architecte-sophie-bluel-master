@@ -126,7 +126,9 @@
 	top: 315px;
 }
 
-
+.form-group-photo.hide-after::after {
+	display: none;
+}
 
 
 .form-group-title{
@@ -143,8 +145,6 @@
 .form-group-title label{
 	margin: 3em 0 1em 0;
 }
-
-
 
 .form-group-id{
 	display: flex;
@@ -184,4 +184,9 @@
 	margin: 15px auto;
 	position: absolute;
 	bottom: 90px;
+}
+
+.js-image-preview {
+	width: 140px;
+	height: 200px;
 }
