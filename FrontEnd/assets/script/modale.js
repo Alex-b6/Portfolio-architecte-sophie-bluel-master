@@ -273,8 +273,10 @@ const openModaleProjet = function(e) {
     modaleProjet.addEventListener("click", closeModaleProjet)
     modaleProjet.querySelector(".js-modale-close").addEventListener("click", closeModaleProjet)
     modaleProjet.querySelector(".js-modale-stop").addEventListener("click", stopPropagation)
+    modaleProjet.querySelector(".js-modale-close").addEventListener("click", resetModaleProjet)
 
     modaleProjet.querySelector(".js-modale-return").addEventListener("click", backToModale)
+    modaleProjet.querySelector(".js-modale-return").addEventListener("click", resetModaleProjet)
 };
 
 
@@ -326,6 +328,28 @@ imageInput.addEventListener("change", function(event) {
         formgpePhoto.classList.add("hide-after"); //cache le ::after
     }
 });
+// test reset modale v.0.1
+
+function resetModaleProjet() {
+    // Réinitialiser les valeurs des champs du formulaire
+    document.querySelector(".js-title").value = "";
+    document.querySelector(".js-categoryId").value = "";
+    
+    // Masquer ou réinitialiser d'autres éléments de la modale si nécessaire
+    // ...
+
+    // Réinitialiser l'aperçu de l'image
+    const imageInput = document.querySelector(".js-image");
+    const previewImg = document.querySelector(".js-image-preview");
+    const formgpePhoto = document.querySelector(".form-group-photo");
+
+    imageInput.value = ""; // Réinitialiser la valeur de l'input file
+    previewImg.src = "";   // Réinitialiser l'aperçu de l'image
+    previewImg.style.display="none";
+    beforePreview.style.display="";
+    /*formgpePhoto.classList.remove("hide-after"); // Afficher le ::after*/
+}
+
 
 // Ajouter un projet
 async function addWork(event) {
@@ -362,6 +386,7 @@ async function addWork(event) {
                 modaleProjets(dataAdmin);
                 backToModale(event);
                 generationProjets(data, null);
+                resetModaleProjet();
             } 
             if (response.status === 400) {
                 alert("Merci de remplir tous les champs");
