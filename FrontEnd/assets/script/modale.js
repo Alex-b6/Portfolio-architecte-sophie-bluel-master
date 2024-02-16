@@ -137,12 +137,9 @@ async function modaleProjets() {
         div.appendChild(p);
         p.classList.add(dataAdmin[i].id, "js-delete-work");
 
-
         const icon = document.createElement("i");
         icon.classList.add("fa-solid", "fa-trash-can"); 
         p.appendChild(icon);
-
-        
     }
     deleteWork()
 }
@@ -189,7 +186,7 @@ window.addEventListener("keydown", function(e) {
 ////////////////////////////////////////////////////
 
 // Récupération du token
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 const AlredyLogged = document.querySelector(".js-alredy-logged");
 
 // Gestion de l'affichage des boutons admin

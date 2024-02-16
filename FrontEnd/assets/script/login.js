@@ -12,8 +12,8 @@ alreadyLogged();
 
 // Si l'utilisateur est déjà connecté, on supprime le token
 function alreadyLogged() {
-    if (localStorage.getItem("token")) {
-        localStorage.removeItem("token");
+    if (sessionStorage.getItem("token")) {
+        sessionStorage.removeItem("token");
 
         const p = document.createElement("p");
         p.insertAdjacentHTML("afterbegin", "<br><br><br>Vous avez été déconnecté, veuillez vous reconnecter");
@@ -71,7 +71,7 @@ function login(id) {
 
         // Si couple email/mdp correct
         } else if (result.token) {
-            localStorage.setItem("token", result.token);
+            sessionStorage.setItem("token", result.token);
             window.location.href = "index.html";
         }
     
