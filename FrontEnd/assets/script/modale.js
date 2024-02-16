@@ -89,7 +89,67 @@ function resetmodaleSectionProjets() {
 	modaleSectionProjets.innerHTML = "";
 }
 
+//////////////////////////////////////////////////////////////////////////
+///////////////////// Gestion Formulaire de Contact //////////////////////
+//////////////////////////////////////////////////////////////////////////
 
+let validContactForm = false; // Assurez-vous que cette variable est définie dans le contexte global si nécessaire
+
+const checkInputContact = () => {
+    const regName = /^[a-zA-Z]+$/;
+    const regMail = /^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z0-9._-]+/;
+    const errorText = document.querySelector(".formContactError");
+
+    if (regName.test(nameContact.value) && regMail.test(emailContact.value) && messageContact.value.trim() !== "") {
+        sumbmitBtn.classList.remove("unable");
+        errorText.textContent = "";
+        validContactForm = true;
+    } else {
+        sumbmitBtn.classList.add("unable");
+        validContactForm = false;
+    }
+};
+
+const submitMessageContact = () => {
+    const displayError = document.querySelector(".formContactError");
+
+    if (validContactForm) {
+        const sentMessage = `Merci ${nameContact.value}, votre message a bien été envoyé.`;
+        const body = `Nom : ${nameContact.value}\nemail : ${emailContact.value}\n-------\nMessage : ${messageContact.value}`;
+        console.log(body);
+        alert(sentMessage);
+
+        // Reset du formulaire
+        nameContact.value = "";
+        emailContact.value = "";
+        messageContact.value = "";
+        validContactForm = false;
+        sumbmitBtn.classList.add("unable");
+    } else {
+        displayError.textContent = "Veuillez compléter tous les champs";
+        setTimeout(() => {
+            displayError.textContent = ""; // Ajout pour effacer le message après un délai
+        }, 300);
+    }
+};
+
+const init = async () => {
+    // Formulaire
+    nameContact.addEventListener("input", checkInputContact);
+    emailContact.addEventListener("input", checkInputContact);
+    messageContact.addEventListener("input", checkInputContact);
+    formContact.addEventListener("submit", (e) => {
+        e.preventDefault();
+        submitMessageContact();
+    });
+};
+
+init();
+
+
+//////////////////////////////////////////////////////////////////////////
+//////////////////////// Gestion Modale //////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Ouverture de la modale
 let modale = null;
 let dataAdmin;
