@@ -93,7 +93,7 @@ function resetmodaleSectionProjets() {
 ///////////////////// Gestion Formulaire de Contact //////////////////////
 //////////////////////////////////////////////////////////////////////////
 
-let validContactForm = false; // Assurez-vous que cette variable est définie dans le contexte global si nécessaire
+let validContactForm = false;
 
 const checkInputContact = () => {
     const regName = /^[a-zA-Z]+$/;
@@ -111,14 +111,18 @@ const checkInputContact = () => {
 };
 
 const submitMessageContact = () => {
+    const displayMessageContainer = document.querySelector(".messageContainer");
     const displayError = document.querySelector(".formContactError");
 
     if (validContactForm) {
         const sentMessage = `Merci ${nameContact.value}, votre message a bien été envoyé.`;
         const body = `Nom : ${nameContact.value}\nemail : ${emailContact.value}\n-------\nMessage : ${messageContact.value}`;
         console.log(body);
-        alert(sentMessage);
-
+        /*alert(sentMessage);*/
+        displayMessageContainer.textContent = sentMessage;
+        setTimeout(() => {
+            displayMessageContainer.textContent = ""; // Ajout pour effacer le message après un délai
+        }, 1200);
         // Reset du formulaire
         nameContact.value = "";
         emailContact.value = "";
@@ -129,7 +133,7 @@ const submitMessageContact = () => {
         displayError.textContent = "Veuillez compléter tous les champs";
         setTimeout(() => {
             displayError.textContent = ""; // Ajout pour effacer le message après un délai
-        }, 300);
+        }, 800);
     }
 };
 

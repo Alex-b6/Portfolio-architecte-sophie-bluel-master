@@ -500,6 +500,17 @@ html {
   border-radius: 60px;
 }
 
+.formContactError {
+  color: red;
+  text-align: center;
+  padding-top: 10px;
+}
+
+.messageContainer {
+  color: green;
+  text-align: center;
+}
+
 .login__form {
   display: flex;
   flex-direction: column;
