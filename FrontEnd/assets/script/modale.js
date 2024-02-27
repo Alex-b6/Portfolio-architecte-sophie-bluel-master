@@ -51,7 +51,7 @@ async function generationProjets(data, id) {
         sectionProjets.appendChild(p);
         return;}
 
-    // Génère les projets
+    // Génère les projets dans le DOM
     if (id === null || [1, 2, 3].includes(id)) {
         for (let i = 0; i < data.length; i++) {
             
@@ -398,9 +398,6 @@ function resetModaleProjet() {
     // Réinitialiser les valeurs des champs du formulaire
     document.querySelector(".js-title").value = "";
     document.querySelector(".js-categoryId").value = "";
-    
-    // Masquer ou réinitialiser d'autres éléments de la modale si nécessaire
-    // ...
 
     // Réinitialiser l'aperçu de l'image
     const imageInput = document.querySelector(".js-image");
@@ -411,7 +408,6 @@ function resetModaleProjet() {
     previewImg.src = "";   // Réinitialiser l'aperçu de l'image
     previewImg.style.display="none";
     beforePreview.style.display="";
-    /*formgpePhoto.classList.remove("hide-after"); // Afficher le ::after*/
 }
 
 
