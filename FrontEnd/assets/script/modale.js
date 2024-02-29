@@ -1,30 +1,20 @@
 // GENERATION DES PROJETS
 
-const btnAll = document.querySelector(".filter__btn-id-null");
-const btnId1 = document.querySelector(".filter__btn-id-1");
-const btnId2 = document.querySelector(".filter__btn-id-2");
-const btnId3 = document.querySelector(".filter__btn-id-3");
-
-const sectionProjets = document.querySelector(".gallery"); 
-
+const sectionProjets = document.querySelector(".gallery");
+const filterContainer = document.getElementById("filterContainer");
+    
 let data = null;
-let id;
-generationProjets(data, null);
-
 // Reset la section projets
-function resetSectionProjets() {  
-	sectionProjets.innerHTML = "";
-    /*const element = document.getElementById("test");
-    element.remove();*/
+function resetSectionProjets() {
+    sectionProjets.innerHTML = "";
 }
-
+    
 // Génère les projets
-async function generationProjets(data, id) { 
+async function generationProjets(id) {
     try {
-        const response = await fetch('http://localhost:5678/api/works'); 
+        const response = await fetch('http://localhost:5678/api/works');
         data = await response.json();
-    }
-    catch{
+    } catch {
         const p = document.createElement("p");
         p.classList.add("error");
         p.insertAdjacentHTML("Afterbegin", "Une erreur est survenue lors de la récupération des projets<br><br>Une tentative de reconnexion automatique auras lieu dans une minute<br><br><br><br>Si le problème persiste, veuillez contacter l'administrateur du site");
@@ -32,63 +22,80 @@ async function generationProjets(data, id) {
         await new Promise(resolve => setTimeout(resolve, 60000));
         window.location.href = "index.html";
     }
-
-    resetSectionProjets()
-
+    
+    resetSectionProjets();
+    
     // Filtre les résultats
-    if ([1, 2, 3].includes(id)) {
-        data = data.filter(data => data.categoryId == id);}
-
-     // Change la couleur du bouton en fonction du filtre
-    document.querySelectorAll(".filter__btn").forEach(btn => {
-        btn.classList.remove("filter__btn--active");})
-    document.querySelector(`.filter__btn-id-${id}`).classList.add("filter__btn--active");
-
-    if (data.length === 0 || data === undefined) { 
+    if (id !== null) {
+        data = data.filter(item => item.categoryId == id);
+    }
+    
+    // Change la couleur du bouton en fonction du filtre
+        document.querySelectorAll(".filter__btn").forEach(btn => {
+            btn.classList.remove("filter__btn--active");
+            document.querySelector(`.filter__btn-id-${id}`).classList.add("filter__btn--active");
+    });
+    
+    
+    if (data.length === 0 || data === undefined) {
         const p = document.createElement("p");
         p.classList.add("error");
         p.insertAdjacentHTML("Afterbegin", "Aucun projet à afficher <br><br>Toutes nos excuses pour la gêne occasionnée");
         sectionProjets.appendChild(p);
-        return;}
-
+        return;
+    }
+    
     // Génère les projets dans le DOM
-    if (id === null || [1, 2, 3].includes(id)) {
-        for (let i = 0; i < data.length; i++) {
-            
-            const figure = document.createElement("figure"); 
-            sectionProjets.appendChild(figure);
-            figure.classList.add(`js-projet-${data[i].id}`); // Ajoute l'id du projet pour le lien vers la modale lors de la supression 
-            /*figure.setAttribute("id","test");*/
-            const img = document.createElement("img");
-            img.src = data[i].imageUrl;
-            img.alt = data[i].title;
-            figure.appendChild(img);
-
-            const figcaption = document.createElement("figcaption");
-            figcaption.insertAdjacentHTML("afterbegin", data[i].title);
-            figure.appendChild(figcaption);
-        }
-}}
-
-// FILTRES
-
-btnAll.addEventListener("click", () => { // Tous les projets
-    generationProjets(data, null);})
-
-btnId1.addEventListener("click", () => { // Objets
-    generationProjets(data, 1);})
-
-btnId2.addEventListener("click", () => { // Appartements
-    generationProjets(data, 2);})
-
-btnId3.addEventListener("click", () => { // Hôtels & restaurants
-    generationProjets(data, 3);})
-
-// Reset la section projets
-function resetmodaleSectionProjets() {  
-	modaleSectionProjets.innerHTML = "";
+    for (let i = 0; i < data.length; i++) {
+        const figure = document.createElement("figure");
+        sectionProjets.appendChild(figure);
+        figure.classList.add(`js-projet-${data[i].id}`); // Ajoute l'id du projet pour le lien vers la modale lors de la suppression
+    
+        const img = document.createElement("img");
+        img.src = data[i].imageUrl;
+        img.alt = data[i].title;
+        figure.appendChild(img);
+    
+        const figcaption = document.createElement("figcaption");
+        figcaption.insertAdjacentHTML("afterbegin", data[i].title);
+        figure.appendChild(figcaption);
+    }
 }
-
+    
+// Appeler ces fonctions au chargement de la page
+async function initializePage() {
+    await generateFilterButtons();
+    await generationProjets(null);
+}
+    
+async function generateFilterButtons() {
+    try {
+        const response = await fetch('http://localhost:5678/api/categories'); // Mettez le bon chemin vers votre API pour récupérer les catégories
+        const categories = await response.json();
+    
+        // Ajout du bouton "Tous"
+        const btnAll = document.createElement("button");
+        btnAll.classList.add("filter__btn", "filter__btn-id-null", "filter__btn--active");
+        btnAll.textContent = "Tous";
+        btnAll.addEventListener("click", () => generationProjets(null));
+        filterContainer.appendChild(btnAll);
+    
+        // Ajout des boutons de catégorie
+        categories.forEach(category => {
+            const btn = document.createElement("button");
+            btn.classList.add("filter__btn", `filter__btn-id-${category.id}`);
+            btn.textContent = category.name; // Assurez-vous que votre API renvoie les noms des catégories
+            btn.addEventListener("click", () => generationProjets(category.id));
+            filterContainer.appendChild(btn);
+        });
+    } catch (error) {
+        console.error('Erreur lors de la récupération des catégories :', error);
+    }
+}
+    
+// Appeler la fonction d'initialisation au chargement de la page
+initializePage();
+    
 //////////////////////////////////////////////////////////////////////////
 ///////////////////// Gestion Formulaire de Contact //////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -154,6 +161,11 @@ init();
 //////////////////////////////////////////////////////////////////////////
 //////////////////////// Gestion Modale //////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
+// Reset la section projets
+function resetmodaleSectionProjets() {  
+	modaleSectionProjets.innerHTML = "";
+}
+
 // Ouverture de la modale
 let modale = null;
 let dataAdmin;
@@ -187,23 +199,25 @@ async function modaleProjets() {
     dataAdmin = await response.json();
     resetmodaleSectionProjets()
     for (let i = 0; i < dataAdmin.length; i++) {
-        
-        const div = document.createElement("div");
-        div.classList.add("gallery__item-modale");
-        modaleSectionProjets.appendChild(div);
+        if (dataAdmin[i].id !== undefined) {
+            const div = document.createElement("div");
+            div.classList.add("gallery__item-modale");
+            div.setAttribute("dataID", dataAdmin[i].id);
+            modaleSectionProjets.appendChild(div);
 
-        const img = document.createElement("img");
-        img.src = dataAdmin[i].imageUrl;
-        img.alt = dataAdmin[i].title;
-        div.appendChild(img);
+            const img = document.createElement("img");
+            img.src = dataAdmin[i].imageUrl;
+            img.alt = dataAdmin[i].title;
+            div.appendChild(img);
 
-        const p = document.createElement("p");
-        div.appendChild(p);
-        p.classList.add(dataAdmin[i].id, "js-delete-work");
+            const p = document.createElement("p");
+            div.appendChild(p);
+            p.classList.add(dataAdmin[i].id, "js-delete-work");
 
-        const icon = document.createElement("i");
-        icon.classList.add("fa-solid", "fa-trash-can"); 
-        p.appendChild(icon);
+            const icon = document.createElement("i");
+            icon.classList.add("fa-solid", "fa-trash-can"); 
+            p.appendChild(icon);
+        }
     }
     deleteWork()
 }
@@ -253,7 +267,6 @@ window.addEventListener("keydown", function(e) {
 const token = sessionStorage.getItem("token");
 const AlredyLogged = document.querySelector(".js-alredy-logged");
 
-// Gestion de l'affichage des boutons admin
 adminPanel()
 // Gestion de l'affichage des boutons admin
 function adminPanel() {
@@ -265,7 +278,7 @@ function adminPanel() {
             a.removeAttribute("aria-hidden")
             a.removeAttribute("style")
             AlredyLogged.innerHTML = "logout";
-            allFilters.style.display="none"; //masque les boutons filtre
+            filterContainer.style.display="none"; //masque les boutons filtre
         }
     });
 }
@@ -311,12 +324,20 @@ async function deleteProjets() {
 }
 
 // Rafraichit les projets sans recharger la page
-async function refreshPage(i){
-    modaleProjets(); // Re lance une génération des projets dans la modale admin
+function refreshPage(i) {
+    /*modaleProjets();*/ // Relance la génération des projets dans la modale admin
 
-    // supprime le projet de la page d'accueil
+    // Supprime le projet de la page d'accueil
     const projet = document.querySelector(`.js-projet-${i}`);
-    projet.style.display = "none";
+    if (projet) {
+        projet.style.display = "none";
+    }
+
+    // Supprime le projet de la modale admin
+    const modaleProjet = document.querySelector(`.gallery__item-modale[dataID="${i}"]`);
+    if (modaleProjet) {
+        modaleProjet.remove();
+    }
 }
 
 ////////////////////////////////////////////////////
@@ -374,7 +395,9 @@ const backToModale = function(e) {
 ///////////////////////////////////////////////////////
 
 const btnAjouterProjet = document.querySelector(".js-add-work");
-btnAjouterProjet.addEventListener("click", addWork);
+/*btnAjouterProjet.addEventListener("click", addWork);*/
+btnAjouterProjet.addEventListener("click", (event) => addWork(event, null));
+
 const imageInput = document.querySelector(".js-image");
 const previewImg = document.querySelector(".js-image-preview") ;
 const formgpePhoto = document.querySelector(".form-group-photo") ;
@@ -386,6 +409,11 @@ imageInput.addEventListener("change", function(event) {
 
     if (selectedImage) {
         const imagePreview = document.querySelector(".js-image-preview");
+        // Vérifie si le type de fichier est pris en charge
+        if (!['image/jpeg', 'image/png'].includes(selectedImage.type)) {
+            alert("Le format de l'image doit être .jpg ou .png");
+            return;
+        }
         imagePreview.src = URL.createObjectURL(selectedImage);
         previewImg.style.display="block"; //affiche la preview du fichier selectionné
         beforePreview.style.display="none"; //cache la partie ajout d'un fichier
@@ -412,7 +440,7 @@ function resetModaleProjet() {
 
 
 // Ajouter un projet
-async function addWork(event) {
+async function addWork(event, id) {
     event.preventDefault();
 
     const title = document.querySelector(".js-title").value;
@@ -425,6 +453,12 @@ async function addWork(event) {
         return;
     } else if (categoryId !== "1" && categoryId !== "2" && categoryId !== "3") {
         alert("Merci de choisir une catégorie valide");
+        return;
+    } else if (image.size > 4 * 1024 * 1024) { // Pour vérifier si la taille est supérieure à 4 Mo
+        alert("La taille de l'image doit être inférieure à 4 Mo");
+        return;
+    } else if (!['image/jpeg', 'image/png'].includes(image.type)) { // Pour vérifier si le type est .jpg ou .png
+        alert("Le format de l'image doit être .jpg ou .png");
         return;
     } else {
         try {
@@ -443,9 +477,11 @@ async function addWork(event) {
 
             if (response.status === 201) {
                 alert("Projet ajouté avec succès");
-                modaleProjets(dataAdmin);
+                // MàJ de l'interface sans refaire d'appel API
+                const newProject = await response.json();
+                updateUIAfterAdd(newProject, id);
+
                 backToModale(event);
-                generationProjets(data, null);
                 resetModaleProjet();
             } 
             if (response.status === 400) {
@@ -459,10 +495,24 @@ async function addWork(event) {
                 window.location.href = "login.html";
             }
 
-            // Réinitialiser l'aperçu de l'image après l'ajout
-            imagePreview.src = "";
         } catch (error) {
             console.log(error);
         }
     }
+}
+// MàJ de l'interface après l'ajout d'un projet
+function updateUIAfterAdd(newProject, id) {
+    // Ajout du nouveau projet à la liste existante
+    const figure = document.createElement("figure");
+    sectionProjets.appendChild(figure);
+    figure.classList.add(`js-projet-${newProject.id}`);
+
+    const img = document.createElement("img");
+    img.src = newProject.imageUrl;
+    img.alt = newProject.title;
+    figure.appendChild(img);
+
+    const figcaption = document.createElement("figcaption");
+    figcaption.insertAdjacentHTML("afterbegin", newProject.title);
+    figure.appendChild(figcaption);
 }
